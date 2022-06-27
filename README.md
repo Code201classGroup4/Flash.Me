@@ -7,7 +7,7 @@ Project Description:
 A customizable Flash Card App.
 
 
-User storeies
+User stories
 - As a student, I want flashcards, so that I can memorize information.
 - As a student, I want to see my progress so that I can track my progress.
 - As a user, I want to login, so that I, have a personalized experience.
