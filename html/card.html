@@ -17,21 +17,23 @@
       <a href="/html/index.html">Add/Change user</a>
     </nav>
 </header>
-  <h1>Card page</h1>
-
-  <section id="card-space">
-      <div id="card-front">Sample Card Question</div>
-      <div id="card-back" class="hidden">Sample Answer</div>
-      
-      <section id="answers-area">
-        <p id="answer1" class="answer">Answer1</p>
-        <p id="answer2" class="answer">Answer2</p>
-        <p id="answer3" class="answer">Answer3</p>
-        <p id="answer4" class="answer">Answer4</p>
-      </section>
-  </section>
- 
   
-  <script src="app.js"></script>
+ <h1>Card page</h1>
+
+ <section id="card-space">
+      <div id="card-front">Sample Card Question that is really long and overflows two lines</div>
+      <!-- <div id="card-back" class="hidden">Sample Answer</div> -->
+  </section>
+      
+  <section id="answers-area">
+        <button id="answer1" class="answer">Answer1</button>
+        <button id="answer2" class="answer">Answer2</button>
+        <button id="answer3" class="answer">Answer3</button>
+        <button id="answer4" class="answer">Answer4</button>
+  </section>
+  <button type="button"  name="next-button" id="next-button">Next Card</button>
+  
+  <script src="/js/app.js"></script>
+  <script src="/js/card.js"></script>
 </body>
 </html>

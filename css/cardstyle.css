@@ -1,47 +1,51 @@
 #card-space {
-    display: flex;
     width: auto;
-    justify-content: center;
-    text-align: center;
-    
+    height:200px;
+    text-align: center; 
     
 }
 
 #card-front {
-    display: block;
-    position: absolute;
-    align-content: center;
+    margin: auto;
     width: 300px;
     height: 200px;
     border:3px solid #ABB7B7;
     border-radius: 5px;
     background-color: yellow;
     z-index: 0;
-    line-height: 200px;
+   
 }
-
-#card-back {
-    display: block;
-    position: absolute;
+/* #card-back {
+    margin: auto;
     width: 300px;
     height: 200px;
     border:3px solid #ABB7B7;
     border-radius: 5px;
     background-color: green;
     z-index: 1;
-    line-height: 200px;
+} */
+
+section>div {
+    width: 300px;
+    height: 200px;
 }
 
-.hidden {
+
+/* .hidden {
     visibility: hidden;
-}
+} */
 
 #answers-area {
-    padding-top: 210px;
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    padding-top: 20px;
+    justify-content: center;
    
 }
 
 #answers-area.answer {
     border:thin solid black;
     font-size: 90px;
+
 }
