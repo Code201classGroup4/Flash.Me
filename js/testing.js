@@ -20,10 +20,20 @@ console.log(JSON.parse(localStorage.getItem('allCards'))); */
 
 //BEGIN CARD DECK TESTING
 
-let d1 = new CardDeck('HTML Deck', 'html');
+/* let d1 = new CardDeck('HTML Deck', 'html');
 let d2 = new CardDeck('CSS Deck', 'css');
-let d3 = new CardDeck('JavaScript Deck', 'js');
-console.log(d1.deck);
+let d3 = new CardDeck('JavaScript Deck', 'js'); */
+// console.log(d1.getRandomCard());
+// console.log(d1.getRandomCard());
+// console.log(d1.getRandomCard());
+// console.log(d2.getRandomCard());
+// console.log(d2.getRandomCard());
+// console.log(d3.getRandomCard());
+/* console.log(d1.getMultipleRandomCards(10));
+console.log(d2.getMultipleRandomCards(10));
+console.log(d3.getMultipleRandomCards(10)); */
+
+/*console.log(d1.deck);
 console.log(d2.deck);
 console.log(d3.deck);
 d1.save();
@@ -39,7 +49,7 @@ console.log(CardDeck.loadAllDecks());
 CardDeck.addDeckToAllDecks(d3);
 console.log(CardDeck.loadAllDecks());
 CardDeck.addDeckToAllDecks(d3);
-console.log(CardDeck.loadAllDecks());
+console.log(CardDeck.loadAllDecks()); */
 
 
 //END CARD DECK TESTING

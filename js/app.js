@@ -129,15 +129,35 @@ function CardDeck(name, category){
   this.deck = Card.getCardsOfCategory(category);
 }
 
-CardDeck.prototype.chooseRandomCard = function(){
-// TO DO: choose a random card from this.deck and return it
-// return Card
+CardDeck.prototype.getRandomCard = function(){
+  let length = this.deck.length;
+  let randomIndex = Math.floor(Math.random() * length);
+  let randomCard = this.deck[randomIndex];
+  return randomCard;
+};
+
+CardDeck.isInDeck = function(card, deck){
+  for (let c of deck){
+    if(c.question === card.question){
+      return true;
+    }
+  }
+  return false;
 };
 
 CardDeck.prototype.getMultipleRandomCards = function(howMany){
 // TO DO: choose 'howMany' random cards from this.deck and return them as an array / list
-
-// return [cards]
+  let cards = [];
+  while (cards.length < howMany && cards.length < this.deck.length){
+    let card = this.getRandomCard();
+    if (CardDeck.isInDeck(card, cards)){
+      continue;
+    }
+    else{
+      cards.push(card);
+    }
+  }
+  return cards;
 };
 
 CardDeck.prototype.addCard = function(card){
