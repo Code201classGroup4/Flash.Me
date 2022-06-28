@@ -7,12 +7,6 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/cardstyle.css">
   <title>Card page</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="cardstylesheet" href="cardstyle.css">
-  
-    <style>
-     
-    </style>
 </head>
 <body>
   <header>
@@ -23,11 +17,20 @@
       <a href="/html/index.html">Add/Change user</a>
     </nav>
 </header>
-  <H1>Card page for the form</H1>
-  <p></p>
-  <H2></H2>
-  <section>
+  <h1>Card page</h1>
+
+  <section id="card-space">
+      <div id="card-front">Sample Card Question</div>
+      <div id="card-back" class="hidden">Sample Answer</div>
+      
+      <section id="answers-area">
+        <p id="answer1" class="answer">Answer1</p>
+        <p id="answer2" class="answer">Answer2</p>
+        <p id="answer3" class="answer">Answer3</p>
+        <p id="answer4" class="answer">Answer4</p>
       </section>
+  </section>
+ 
   
   <script src="app.js"></script>
 </body>
