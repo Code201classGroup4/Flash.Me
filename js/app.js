@@ -281,14 +281,6 @@ function UserInterface(user, deck){
   this.deck = deck;
 }
 
-UserInterface.prototype.displayCard = function(){
-  //TO DO
-};
-
-UserInterface.prototype.handleClick = function(event){
-  //TO DO
-};
-
 ////////////////////////////////////////////////////////////////
 
 
