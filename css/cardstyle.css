@@ -1,0 +1,47 @@
+#card-space {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    text-align: center;
+    
+    
+}
+
+#card-front {
+    display: block;
+    position: absolute;
+    align-content: center;
+    width: 300px;
+    height: 200px;
+    border:3px solid #ABB7B7;
+    border-radius: 5px;
+    background-color: yellow;
+    z-index: 0;
+    line-height: 200px;
+}
+
+#card-back {
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border:3px solid #ABB7B7;
+    border-radius: 5px;
+    background-color: green;
+    z-index: 1;
+    line-height: 200px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+#answers-area {
+    padding-top: 210px;
+   
+}
+
+#answers-area.answer {
+    border:thin solid black;
+    font-size: 90px;
+}

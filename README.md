@@ -41,8 +41,8 @@ OUT - What won't your product do
 ## Minimum Viable Product
 - randomly generate cards 
 - easily modify the cards
-- contain multiple subjects 
-- contain default cards from CODE 201 concepts 
+- contain multiple subjects
+- contain default cards from CODE 201 concepts
 - track correct answers
 - answers fields are multiple choice
 - possible answers are generated from correct answers to other cards
