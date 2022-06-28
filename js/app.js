@@ -35,12 +35,12 @@ Card.prototype.isCorrect = function(usersAnswer){
   else return false;
 };
 
-//add a category to a card
+//add a category tag to a card
 Card.prototype.addCategory = function(category){
   this.categories.push(category);
 };
 
-//check if a card has a given category
+//check if a card has a given category tag
 Card.prototype.hasCategory = function(category){
   for(let cat of this.categories){
     if (cat === category){
@@ -108,6 +108,11 @@ Card.getCardsOfCategory = function(category){
 
 Card.addCardToAllCards = function(card){
   let allCards = Card.loadAllCards();
+  for (let c of allCards) {
+    if (c.question === card.question){
+      return;
+    }
+  }
   allCards.push(card);
   localStorage.setItem('allCards', JSON.stringify(allCards));
 };
@@ -118,13 +123,15 @@ Description: Represents a collection of cards; a deck.
   category : string
   deck : Card array
 */
-function CardDeck(category){
-  this.category = category;
+function CardDeck(name, category){
+  this.name = name;
+  this.categories = [category];
   this.deck = Card.getCardsOfCategory(category);
 }
 
 CardDeck.prototype.chooseRandomCard = function(){
 // TO DO: choose a random card from this.deck and return it
+// return Card
 };
 
 CardDeck.prototype.getMultipleRandomCards = function(howMany){
@@ -139,6 +146,13 @@ CardDeck.prototype.addCard = function(card){
   Card.addCardToAllCards(card);
 };
 
+CardDeck.prototype.addCategory = function(category){
+  for (let card of Card.getCardsOfCategory(category)){
+    this.push(card);
+  }
+  this.categories.push(category);
+};
+
 CardDeck.prototype.save = function(){
   localStorage.setItem('cDeck', JSON.stringify(this));
 };
@@ -146,7 +160,8 @@ CardDeck.prototype.save = function(){
 //turn JSON.parsed deck back into a CardDeck object
 CardDeck.loadDeck = function(parsedDeck){
   let newDeck = new CardDeck();
-  newDeck.category = parsedDeck.category;
+  newDeck.name = parsedDeck.name;
+  newDeck.categories = parsedDeck.categories;
 
   for (let card of parsedDeck.deck){
     newDeck.deck.push(Card.loadCard(card));
@@ -155,23 +170,30 @@ CardDeck.loadDeck = function(parsedDeck){
 };
 
 CardDeck.loadAllDecks = function() {
-  if (localStorage.getItem('allDecks')){
-    let decks = JSON.parse(localStorage.getItem('allDecks'));
+  let allDecks = JSON.parse(localStorage.getItem('allDecks'));
+  if (allDecks){
     let output = [];
-    for (let d of decks){
-      output.push(CardDeck.loadDeck(d));
+    for (let d of allDecks){
+      let deck = CardDeck.loadDeck(d);
+      output.push(deck);
     }
     return output;
   }
   else {
+    localStorage.setItem('allDecks',JSON.stringify([]));
     return [];
   }
 };
 
 CardDeck.addDeckToAllDecks = function(deck){
-  let decks = CardDeck.loadAllDecks();
-  decks.push(deck);
-  localStorage.setItem('allDecks', decks);
+  let allDecks = CardDeck.loadAllDecks();
+  for (let d of allDecks){
+    if (deck.name === d.name){
+      return;
+    }
+  }
+  allDecks.push(deck);
+  localStorage.setItem('allDecks', JSON.stringify(allDecks));
 };
 
 /*
@@ -194,7 +216,7 @@ User.prototype.record = function(card, correctOrNot){
 };
 
 User.prototype.save = function(){
-  localStorage.setItem('cUser', this);
+  localStorage.setItem('cUser', JSON.stringify(this));
 };
 
 User.load = function(parsedUser){
@@ -204,20 +226,30 @@ User.load = function(parsedUser){
 };
 
 User.loadAllUsers = function(){
-  if (localStorage.getItem('allUsers')) {
-    let allUsers = [];
-    for(let user in JSON.parse(localStorage.getItem('allUsers'))){
-      allUsers.push(User.load(user));
+  let allUsers = JSON.parse(localStorage.getItem('allUsers'));
+  if (allUsers){
+    let output = [];
+    for (let u of allUsers){
+      let user = User.load(u);
+      output.push(user);
     }
-    return allUsers;
+    return output;
   }
-  else{
+  else {
+    localStorage.setItem('allUsers',JSON.stringify([]));
     return [];
   }
 };
 
 User.addUserToAllUsers = function(user){
-  //TO DO
+  let allUsers = User.loadAllUsers();
+  for (let u of allUsers){
+    if (user.name === u.name){
+      return;
+    }
+  }
+  allUsers.push(user);
+  localStorage.setItem('allUsers', JSON.stringify(allUsers));
 };
 
 /*
