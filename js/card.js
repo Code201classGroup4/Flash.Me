@@ -32,18 +32,24 @@ UserInterface(user, deck)
 let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))), CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck'))));
 
 UserInterface.prototype.askQuestions = function(cardStack){
+  let cardFront = document.getElementById('card-front');
+
   if (cardStack.length === 0){
+    this.user.save();
+    alert(`${this.user.name} finished the stack!`);
     return;
   }
+
   let card = cardStack.pop();
   let answerStack = this.deck.getMultipleRandomCards(3);
   let aUser = this.user;
+  let theUX = this;
 
-  let cardFront = document.getElementById('card-front');
   let a1 = document.getElementById('answer1');
   let a2 = document.getElementById('answer2');
   let a3 = document.getElementById('answer3');
   let a4 = document.getElementById('answer4');
+  let next = document.getElementById('next-button');
   cardFront.textContent = card.question;
   a1.textContent = card.answer;
   a2.textContent = answerStack[0].answer;
@@ -58,27 +64,28 @@ UserInterface.prototype.askQuestions = function(cardStack){
     let clickedAnswer = event.target.textContent;
     if (clickedAnswer === card.answer){
       cardFront.textContent = 'CORRECT';
-      aUser.record(card.question, true);
+      aUser.record(card, true);
     }
     else {
-      cardFront.textContent = 'INCORRECT';
-      aUser.record(card.question, false);
+      cardFront.textContent = `${aUser.name} was INCORRECT. The answer was "${card.answer}".`;
+      aUser.record(card, false);
     }
     a1.removeEventListener('click', handleClick);
     a2.removeEventListener('click', handleClick);
     a3.removeEventListener('click', handleClick);
     a4.removeEventListener('click', handleClick);
-
+    next.addEventListener('click', nextButton);
   }
 
   function nextButton(event){
-    
+    next.removeEventListener('click', nextButton);
+    theUX.askQuestions(cardStack);
   }
 };
 
-UserInterface.prototype.ask = function(){
-  let cardStack = this.deck.getMultipleRandomCards(7);
+UserInterface.prototype.ask = function(stackSize){
+  let cardStack = this.deck.getMultipleRandomCards(stackSize);
   this.askQuestions(cardStack);
 };
 
-ux.ask();
+ux.ask(8);
