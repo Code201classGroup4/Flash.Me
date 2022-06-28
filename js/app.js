@@ -35,12 +35,12 @@ Card.prototype.isCorrect = function(usersAnswer){
   else return false;
 };
 
-//add a category to a card
+//add a category tag to a card
 Card.prototype.addCategory = function(category){
   this.categories.push(category);
 };
 
-//check if a card has a given category
+//check if a card has a given category tag
 Card.prototype.hasCategory = function(category){
   for(let cat of this.categories){
     if (cat === category){
@@ -108,6 +108,11 @@ Card.getCardsOfCategory = function(category){
 
 Card.addCardToAllCards = function(card){
   let allCards = Card.loadAllCards();
+  for (let c of allCards) {
+    if (c.question === card.question){
+      return;
+    }
+  }
   allCards.push(card);
   localStorage.setItem('allCards', JSON.stringify(allCards));
 };
@@ -118,25 +123,54 @@ Description: Represents a collection of cards; a deck.
   category : string
   deck : Card array
 */
-function CardDeck(category){
-  this.category = category;
+function CardDeck(name, category){
+  this.name = name;
+  this.categories = [category];
   this.deck = Card.getCardsOfCategory(category);
 }
 
-CardDeck.prototype.chooseRandomCard = function(){
-// TO DO: choose a random card from this.deck and return it
+CardDeck.prototype.getRandomCard = function(){
+  let length = this.deck.length;
+  let randomIndex = Math.floor(Math.random() * length);
+  let randomCard = this.deck[randomIndex];
+  return randomCard;
+};
+
+CardDeck.isInDeck = function(card, deck){
+  for (let c of deck){
+    if(c.question === card.question){
+      return true;
+    }
+  }
+  return false;
 };
 
 CardDeck.prototype.getMultipleRandomCards = function(howMany){
 // TO DO: choose 'howMany' random cards from this.deck and return them as an array / list
-
-// return [cards]
+  let cards = [];
+  while (cards.length < howMany && cards.length < this.deck.length){
+    let card = this.getRandomCard();
+    if (CardDeck.isInDeck(card, cards)){
+      continue;
+    }
+    else{
+      cards.push(card);
+    }
+  }
+  return cards;
 };
 
 CardDeck.prototype.addCard = function(card){
   //add a card to this deck and the 'all cards' list in local storage
   this.deck.push(card);
   Card.addCardToAllCards(card);
+};
+
+CardDeck.prototype.addCategory = function(category){
+  for (let card of Card.getCardsOfCategory(category)){
+    this.push(card);
+  }
+  this.categories.push(category);
 };
 
 CardDeck.prototype.save = function(){
@@ -146,7 +180,8 @@ CardDeck.prototype.save = function(){
 //turn JSON.parsed deck back into a CardDeck object
 CardDeck.loadDeck = function(parsedDeck){
   let newDeck = new CardDeck();
-  newDeck.category = parsedDeck.category;
+  newDeck.name = parsedDeck.name;
+  newDeck.categories = parsedDeck.categories;
 
   for (let card of parsedDeck.deck){
     newDeck.deck.push(Card.loadCard(card));
@@ -155,23 +190,30 @@ CardDeck.loadDeck = function(parsedDeck){
 };
 
 CardDeck.loadAllDecks = function() {
-  if (localStorage.getItem('allDecks')){
-    let decks = JSON.parse(localStorage.getItem('allDecks'));
+  let allDecks = JSON.parse(localStorage.getItem('allDecks'));
+  if (allDecks){
     let output = [];
-    for (let d of decks){
-      output.push(CardDeck.loadDeck(d));
+    for (let d of allDecks){
+      let deck = CardDeck.loadDeck(d);
+      output.push(deck);
     }
     return output;
   }
   else {
+    localStorage.setItem('allDecks',JSON.stringify([]));
     return [];
   }
 };
 
 CardDeck.addDeckToAllDecks = function(deck){
-  let decks = CardDeck.loadAllDecks();
-  decks.push(deck);
-  localStorage.setItem('allDecks', decks);
+  let allDecks = CardDeck.loadAllDecks();
+  for (let d of allDecks){
+    if (deck.name === d.name){
+      return;
+    }
+  }
+  allDecks.push(deck);
+  localStorage.setItem('allDecks', JSON.stringify(allDecks));
 };
 
 /*
@@ -181,6 +223,7 @@ Description: Represents a User
 function User(name){
   this.name = name;
   this.history = {};
+  this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'css')];
 }
 
 User.prototype.record = function(card, correctOrNot){
@@ -194,7 +237,7 @@ User.prototype.record = function(card, correctOrNot){
 };
 
 User.prototype.save = function(){
-  localStorage.setItem('cUser', this);
+  localStorage.setItem('cUser', JSON.stringify(this));
 };
 
 User.load = function(parsedUser){
@@ -204,20 +247,30 @@ User.load = function(parsedUser){
 };
 
 User.loadAllUsers = function(){
-  if (localStorage.getItem('allUsers')) {
-    let allUsers = [];
-    for(let user in JSON.parse(localStorage.getItem('allUsers'))){
-      allUsers.push(User.load(user));
+  let allUsers = JSON.parse(localStorage.getItem('allUsers'));
+  if (allUsers){
+    let output = [];
+    for (let u of allUsers){
+      let user = User.load(u);
+      output.push(user);
     }
-    return allUsers;
+    return output;
   }
-  else{
+  else {
+    localStorage.setItem('allUsers',JSON.stringify([]));
     return [];
   }
 };
 
 User.addUserToAllUsers = function(user){
-  //TO DO
+  let allUsers = User.loadAllUsers();
+  for (let u of allUsers){
+    if (user.name === u.name){
+      return;
+    }
+  }
+  allUsers.push(user);
+  localStorage.setItem('allUsers', JSON.stringify(allUsers));
 };
 
 /*

@@ -8,8 +8,30 @@ localStorage key: allUsers - an arra of User objects representing all users crea
 localStorage key: cUser - the current loaded user
 localStorage key: cDeck - the current loaded deck
 
+for question of user.history
+
 Card(question, answer, categories)
 CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
+function renderChart(){
+
+  
+}
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: allCards,
+    datasets: [{
+      label: 'Questions',
+      data: questionSeen,
+      backgroundColor: '#04b3d5'
+    }, {
+      label: '# of correct answers',
+      data: answeredCorrect,
+      backgroundColor: '#ffcc85'
+    }],
+  }
+});

@@ -16,19 +16,24 @@
             <a href="/html/index.html">Add/Change user</a>
         </nav>
     </header>
-<div>
-    <form id="user-name">
-        <fieldset>
-            <legend>Input username</legend>
-            <div>
-                <label>username</label>
-                <input id="user-name" name="userName" type="text" placeholder="Ex. What is your name?" required>
-            </div>
-            <button id="submit-button">Submit</button>
-        </fieldset>
-    </form>
-
-
-</div>
+    <div>
+        <form id="user-name-form">
+            <fieldset>
+                <legend>Input username</legend>
+                <div>
+                    <label for="user-name">username</label>
+                    <input list="user-name-list" id="user-name-input" name="user-name-input" />
+                    <datalist id="user-name-list">
+                </div>
+                <button id="submit-button">Submit</button>
+            </fieldset>
+        </form>
+        <h1></h1>
+    </div>
+    <section id="chooseDeck">
+        
+    </section>
+<script src="../js/app.js"></script>
+<script src="../js/homepage.js"></script>
 </body>
 </html>
