@@ -20,7 +20,9 @@ let incorrectArray = [];
 
 let aUser = User.load(JSON.parse(localStorage.getItem('cUser')));
 let p = document.getElementById('login-info');
-p.textContent = `User: ${aUser.name}. Current Deck: ${aUser.currentDeck.name}.`;
+if (p){
+  p.textContent = `User: ${aUser.name}. Current Deck: ${aUser.currentDeck.name}.`;
+}
 
 function renderChart(){
   for(let question in aUser.history){

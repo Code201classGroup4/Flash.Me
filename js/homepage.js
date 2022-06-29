@@ -57,5 +57,7 @@ function logIn(u, isNew){
   ux.chooseDeck(document.getElementById('chooseDeck'));
 
   let p = document.getElementById('login-info');
-  p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+  if (p){
+    p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+  }
 }

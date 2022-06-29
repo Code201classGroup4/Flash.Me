@@ -15,7 +15,10 @@ UserInterface(user, deck)
 //TO DO: rewrite UX so it only takes user
 let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))));
 let p = document.getElementById('login-info');
-p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+if (p){
+  p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+}
+
 
 UserInterface.prototype.askQuestions = function(cardStack){
   let cardFront = document.getElementById('card-front');
@@ -73,6 +76,7 @@ UserInterface.prototype.askQuestions = function(cardStack){
     else {
       cardFront.textContent = `${aUser.name} was INCORRECT. The answer was "${card.answer}".`;
       aUser.record(card, false);
+      cardStack.unshift(card);
     }
     a1.removeEventListener('click', handleClick);
     a2.removeEventListener('click', handleClick);

@@ -187,6 +187,11 @@ CardDeck.load = function(parsedDeck){
   return newDeck;
 };
 
+CardDeck.combineDecks = function(anArrayOfDecks){
+  //TO DO: make a new deck that combines all given decks and return it
+  return newDeck;
+};
+
 /*
 User Object
 Description: Represents a User
@@ -290,11 +295,31 @@ UserInterface.prototype.chooseDeck = function(section){
         section.appendChild(h1);
 
         let p = document.getElementById('login-info');
-        p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+        if (p){
+          p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+        }
       }
     }
   }
 };
+
+UserInterface.prototype.chooseDeckBoxes = function(section){
+  //TO DO: make a new choose deck function that creates checkboxes based off of this.user.decks
+  // 1. Generate checkboxes from this.user.decks
+  // 2. Add a button 'Choose Decks'
+  // 3. Add an Event Handler to the button
+  // 4. Write an event handling function for the button:
+  //  4.A. Make a list (array) with an entry that is the deck name for each box that was checked
+  //  4.B. Make an empty list (array) to store chosen decks
+  //  4.C. Loop through the decknames list
+  //  4.D. For each name in the deck names list, loop through this.user.decks
+  //  4.E. if a name in the checked boxes list matches a name in this.user.decks, add the deck to the chosen decks list
+  //  4.F. after all chosen decks are added to the list, pass the list to the CardDeck.combineDecks(AnArrayOfDecks) method
+  //  4.G. that will return a new deck that combines the chosen decks. assign it to user.currentDeck and add it to user.decks
+  //  4.H. Save the user.
+}
+
+
 
 ////////////////////////////////////////////////////////////////
 
