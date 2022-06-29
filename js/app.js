@@ -188,7 +188,17 @@ CardDeck.load = function(parsedDeck){
 };
 
 CardDeck.combineDecks = function(anArrayOfDecks){
-  //TO DO: make a new deck that combines all given decks and return it
+  let newDeck = new CardDeck('Combined','html');
+  newDeck.deck = [];
+  for (let d of anArrayOfDecks){
+    newDeck.name = newDeck.name + ' + ' + d.name;
+    for (let cat of d.categories){
+      newDeck.categories.push(cat);
+    }
+    for (let c of d.deck){
+      newDeck.deck.push(c);
+    }
+  }
   return newDeck;
 };
 
@@ -230,8 +240,6 @@ User.load = function(parsedUser){
 
 User.loadAllUsers = function(){
   let allUsers = JSON.parse(localStorage.getItem('allUsers'));
-  console.log('loading allUsers');
-  console.log(allUsers);
   if (allUsers){
     let output = [];
     for (let u of allUsers){
@@ -263,6 +271,7 @@ User.prototype.save = function(){
   localStorage.setItem('cUser', JSON.stringify(this));
   User.addUserToAllUsers(this);
 };
+
 /*
  UserInterfaceObject
 */
