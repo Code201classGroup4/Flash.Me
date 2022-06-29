@@ -36,7 +36,11 @@ UserInterface.prototype.askQuestions = function(cardStack){
 
   if (cardStack.length === 0){
     this.user.save();
-    alert(`${this.user.name} finished the stack!`);
+    let a = document.createElement('a');
+    a.textContent = 'Session Complete. Click here to view results.';
+    a.href = 'results.html';
+    cardFront.textContent = '';
+    cardFront.appendChild(a);
     return;
   }
 
