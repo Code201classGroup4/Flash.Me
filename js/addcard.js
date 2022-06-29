@@ -15,7 +15,9 @@ UserInterface(user, deck)
 
 let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))));
 let p = document.getElementById('login-info');
-p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+
+if (p) { p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`
+;}
 
 ux.chooseDeck(document.getElementById('chooseForm'));
 
