@@ -10,30 +10,11 @@
     width: 600px;
     height: 400px;
     border:3px solid #ABB7B7;
-    border-radius: 5px;
-    background-color: yellow;
+    border-radius: 4px;
+    background-color: #FCFCFD;
     z-index: 0;
    
 }
-/* #card-back {
-    margin: auto;
-    width: 300px;
-    height: 200px;
-    border:3px solid #ABB7B7;
-    border-radius: 5px;
-    background-color: green;
-    z-index: 1;
-} */
-
-section>div {
-    width: 600px;
-    height: 400px;
-}
-
-
-/* .hidden {
-    visibility: hidden;
-} */
 
 #answers-area {
     display: flex;
@@ -79,7 +60,7 @@ button {
   touch-action: manipulation;
   white-space: nowrap;
   will-change: box-shadow,transform;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 
@@ -107,10 +88,11 @@ button:active {
 
 .fixed {
     position: fixed;
-    bottom: 10px;
+    bottom: 60px;
     right: 10px;
     width: 300px;
     height: 20px;
+    background-color: #FCFCFD;
     border:3px solid #ABB7B7;
     border-radius: 5px;
     text-align: center;
