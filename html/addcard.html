@@ -21,36 +21,31 @@
 </header>
   <h1>Add Card page</h1>
   
-  
   <form id='addCard'>
     <fieldset>
-      <legend></legend>
+      <legend>Add New Card</legend>
       
+      <section id="chooseForm"></section>
       <div class='formDiv'>
-        <label for='QuestionField'> </label>
-        <input type='text' name='cityName' required>
+        <label for='question'>Question: </label>
+        <input type='text' id='question' name='question' required>
         
-        <label for=''></label>
-        <input type="text" name='' required>
+        <label for='answer'>Answer: </label>
+        <input type="text" id='answer' name='answer' required>
+
+        <label for="category">Category: </label>
+        <input type="text" id="category" name="category" required>
       </div>
       
-      
-      
-      <input id='button' type="submit" value="Click here to add Flash">
+      <button type="submit">Add A Card to the Current Deck</button>
     </fieldset>
-    <div class='about'>
-      <p></p>
-    </div>
   
-    
-    
-  
-    
-    
+
     <footer>
       <p>&copy; 2022 "Team Lightning" - Josh Frazer, Trevor Stephens, Matthew Gebhart, Ari Palmer</p>
     </footer>
-  <script src="./app.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/addcard.js"></script>
 </body>
 
 </html> 

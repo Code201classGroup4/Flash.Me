@@ -30,6 +30,7 @@ function handleAddCard(event){
   let c = event.target.elements['category'].value;
   let newCard = new Card(q, a, c);
   d.addCard(newCard);
+  d.save();
   alert(`${newCard.question} added to ${d.name}.`);
   location.reload();
 }
