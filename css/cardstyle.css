@@ -1,20 +1,35 @@
 #card-space {
     width: auto;
     height:400px;
-    text-align: center; 
     
 }
 
 #card-front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 600px;
+    height: 400px;
     margin: auto;
+    border:3px solid #ABB7B7;
+    border-radius: 4px;
+    background-color: #FCFCFD;
+    font-size: 24px;
+    z-index: 0;
+}
+
+/* #card-stack1 {
+    position: absolute;
+    top: 112px;
+    left: 220px;
     width: 600px;
     height: 400px;
     border:3px solid #ABB7B7;
     border-radius: 4px;
     background-color: #FCFCFD;
-    z-index: 0;
-   
-}
+    z-index: -1;
+} */
 
 #answers-area {
     display: flex;
@@ -26,11 +41,6 @@
    
 }
 
-
-    /* <!-- HTML !-->
-<button class="button-30" role="button">Button 30</button> */
-
-/* CSS */
 button {
   align-items: center;
   width: 600px;
@@ -80,10 +90,11 @@ button:active {
 
 #next-button {
     display: flex;
-    margin: 60%;
+    margin: 65%;
     margin-top: 20px;
     width: 120px;
     background-color: #2531DB;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#6B6D8F 0 -3px 0 inset;
     color: white;
      
 }
