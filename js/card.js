@@ -96,4 +96,4 @@ UserInterface.prototype.ask = function(stackSize){
   this.askQuestions(cardStack);
 };
 
-ux.ask(8);
+ux.ask(ux.user.currentDeck.deck.length);

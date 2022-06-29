@@ -316,23 +316,71 @@ UserInterface.prototype.chooseDeck = function(section){
 UserInterface.prototype.chooseDeckBoxes = function(section){
   //TO DO: make a new choose deck function that creates checkboxes based off of this.user.decks
   // 1. Generate checkboxes from this.user.decks
+  section.innerHTML = '';
+  let decks = this.user.decks;
+  let theUser = this.user;
+  let deckNumber = 0;
+  let checkboxValues = [];
+  for (let d of decks){
+    let inputElement = document.createElement('input');
+    inputElement.type = 'checkbox';
+    inputElement.id = `checkbox${deckNumber}`;
+    inputElement.name = inputElement.id;
+    inputElement.value = d.name;
+    checkboxValues.push(inputElement.value);
+
+    let label = document.createElement('label');
+    label.textContent = d.name;
+    label.for = inputElement.id;
+    deckNumber++;
+    
+    section.appendChild(inputElement);
+    section.appendChild(label);
+  }
   // 2. Add a button 'Choose Decks'
+  let button = document.createElement('button');
+  button.textContent = 'Choose Decks';
   // 3. Add an Event Handler to the button
-  // 4. Write an event handling function for the button:
-  //  4.A. Make a list (array) with an entry that is the deck name for each box that was checked
-  //  4.B. Make an empty list (array) to store chosen decks
-  //  4.C. Loop through the decknames list
-  //  4.D. For each name in the deck names list, loop through this.user.decks
-  //  4.E. if a name in the checked boxes list matches a name in this.user.decks, add the deck to the chosen decks list
-  //  4.F. after all chosen decks are added to the list, pass the list to the CardDeck.combineDecks(AnArrayOfDecks) method
-  //  4.G. that will return a new deck that combines the chosen decks. assign it to user.currentDeck and add it to user.decks
-  //  4.H. Save the user.
+  button.addEventListener('click', handleCheckSelectAdd);
+  section.appendChild(button);
+
+  function handleCheckSelectAdd(event){
+    button.removeEventListener('click', handleCheckSelectAdd);
+    // 4. Write an event handling function for the button:
+    //  4.A. Make a list (array) with an entry that is the deck name for each box that was checked
+    let checkedBoxNodes = document.querySelectorAll('input:checked');
+    let checkedBoxNames = [];
+    for (let node of checkedBoxNodes){
+      checkedBoxNames.push(node.value);
+    }
+    //  4.B. Make an empty list (array) to store chosen decks
+    let chosenDecks = [];
+    //4.C. Loop through the names list
+    for (let dName of checkedBoxNames){
+      //4.D. For each name in the deck names list, loop through this.user.decks
+      for (let d of decks){
+        //4.E. if a name in the checked boxes list matches a name in this.user.decks, add the deck to the chosen decks list
+        if (d.name === dName){
+          chosenDecks.push(d);
+        }
+      }
+    }
+    //4.F. after all chosen decks are added to the list, pass the list to the CardDeck.combineDecks(AnArrayOfDecks) method
+    let newDeck = CardDeck.combineDecks(chosenDecks);
+    //4.G assign the new deck to user current deck and add it to user decks
+    theUser.currentDeck = newDeck;
+    theUser.decks.push(newDeck);
+    //4.H save the user
+    theUser.save();
+
+    section.innerHTML = '';
+    let h1 = document.createElement('h1');
+    h1.textContent = `Current Deck is: ${theUser.currentDeck.name}`;
+    section.appendChild(h1);
+
+    let p = document.getElementById('login-info');
+    if (p){
+      p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
+    }
+  }
 }
-
-
-
-////////////////////////////////////////////////////////////////
-
-
-
-

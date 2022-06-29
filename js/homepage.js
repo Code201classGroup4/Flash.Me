@@ -54,7 +54,7 @@ function logIn(u, isNew){
   else {
     h1.textContent = `Previous User ${u.name} is Logged In.`;
   }
-  ux.chooseDeck(document.getElementById('chooseDeck'));
+  ux.chooseDeckBoxes(document.getElementById('chooseDeck'));
 
   let p = document.getElementById('login-info');
   if (p){
