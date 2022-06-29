@@ -38,7 +38,7 @@ footer {
     width: 100%;
     padding: 1px;
     border-radius: 4px;
-    background-color: rgb(19, 17, 17);
+    background-color: rgba(220, 220, 220, 1);
     text-align: center;
     color:aliceblue;
 }
