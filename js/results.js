@@ -45,16 +45,37 @@ let ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
   type: 'bar',
+  backgroundColor:'red',
   data: {
     labels: questionsArray,
+    
     datasets: [{
       label: '# of correct answers',
+      
       data: correctArray,
-      backgroundColor: '#04b3d5'
+      backgroundColor: '#966F33',
+      
     }, {
       label: '# of incorrect answers',
       data: incorrectArray,
-      backgroundColor: '#ffcc85'
+      backgroundColor: '#335B96',
     }],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      yAxes: {
+        ticks: { color: 'black', beginAtZero: true, fontSize: 100, },
+        yAxes: [{
+          ticks: {
+            fontSize: 50,
+          }
+        }]
+      },
+      x: {
+        ticks: { color: 'black', beginAtZero: true }
+      }
+    }
   }
 });
+
