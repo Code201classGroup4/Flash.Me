@@ -274,6 +274,7 @@ UserInterface.prototype.chooseDeck = function(section){
   section.innerHTML = '';
   let label = document.createElement('label');
   label.textContent = 'Choose a Deck:';
+  label.id = "deck-choice-label";
   section.appendChild(label);
   for (let d of this.user.decks){
     let button = document.createElement('button');
