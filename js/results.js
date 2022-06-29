@@ -15,22 +15,45 @@ CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
-function renderChart(){
+let questionsArray =[];
+let correctArray = [];
+let incorrectArray = [];
 
-  
+let aUser = User.load(JSON.parse(localStorage.getItem('cUser')));
+
+function renderChart(){
+  for(let question in aUser.history){
+    let answers = aUser.history[question];
+    let wrongAnswers = 0;
+    let rightAnswers = 0;
+    for(let i =0; i < answers.length; i++){
+      if (answers[i] === true){
+        rightAnswers++;
+      }
+      else{
+        wrongAnswers++;
+      }
+    }
+    questionsArray.push(question);
+    correctArray.push(rightAnswers);
+    incorrectArray.push(wrongAnswers);
+  }
 }
+
+renderChart();
+let ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: allCards,
+    labels: questionsArray,
     datasets: [{
-      label: 'Questions',
-      data: questionSeen,
+      label: '# of correct answers',
+      data: correctArray,
       backgroundColor: '#04b3d5'
     }, {
-      label: '# of correct answers',
-      data: answeredCorrect,
+      label: '# of incorrect answers',
+      data: incorrectArray,
       backgroundColor: '#ffcc85'
     }],
   }

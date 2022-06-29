@@ -21,8 +21,87 @@ UserInterface(user, deck)
 //TO DO: using the CDeck's getMultipleRandomCards() function, make a list of of cards to answer in random order
 //TO DO: display the first card in the list (should probably make a displayCard(card) method for UserInterface)
 //TO DO: using the CDeck's getMultipleRandomCards() function, generate 3 answers in addition to the correct one
-    // Should probably make a method in UserInterface to do this (see above)
+// Should probably make a method in UserInterface to do this (see above)
 //TO DO: display the 4 possible answers as options for the user to click (will need event handlers on elements)
 //TO DO: use the CDeck's Current Card's isCorrect function to determine if the chosen answer was correct or not
 //TO DO: user the cUser's record() function to record the results for that card
 //TO DO: remove the card from the randomly generated list, repeat for next one
+
+let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))), CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck'))));
+
+UserInterface.prototype.askQuestions = function(cardStack){
+  let cardFront = document.getElementById('card-front');
+  let cardcount = document.getElementById('card-counter');
+  cardcount.textContent = cardStack.length + ' Cards Left.';
+
+  if (cardStack.length === 0){
+    this.user.save();
+    let a = document.createElement('a');
+    a.textContent = 'Session Complete. Click here to view results.';
+    a.href = 'results.html';
+    cardFront.textContent = '';
+    cardFront.appendChild(a);
+    return;
+  }
+
+  let card = cardStack.pop();
+  let answerStack = this.deck.getMultipleRandomCards(3);
+  //prevent same answer appearing twice
+  while(CardDeck.isInDeck(card, answerStack)){
+    for (let i = 0; i < answerStack.length; i++){
+      if(answerStack[i].question === card.question){
+        answerStack[i] = this.deck.getRandomCard();
+      }
+    }
+  }
+  let index = Math.floor(Math.random() * answerStack.length);
+  answerStack.splice(index, 0, card);
+
+
+  let aUser = this.user;
+  let theUX = this;
+
+  let a1 = document.getElementById('answer1');
+  let a2 = document.getElementById('answer2');
+  let a3 = document.getElementById('answer3');
+  let a4 = document.getElementById('answer4');
+  let next = document.getElementById('next-button');
+  cardFront.textContent = card.question;
+  a1.textContent = answerStack[0].answer;
+  a2.textContent = answerStack[1].answer;
+  a3.textContent = answerStack[2].answer;
+  a4.textContent = answerStack[3].answer;
+  a1.addEventListener('click', handleClick);
+  a2.addEventListener('click', handleClick);
+  a3.addEventListener('click', handleClick);
+  a4.addEventListener('click', handleClick);
+
+  function handleClick(event){
+    let clickedAnswer = event.target.textContent;
+    if (clickedAnswer === card.answer){
+      cardFront.textContent = 'CORRECT';
+      aUser.record(card, true);
+    }
+    else {
+      cardFront.textContent = `${aUser.name} was INCORRECT. The answer was "${card.answer}".`;
+      aUser.record(card, false);
+    }
+    a1.removeEventListener('click', handleClick);
+    a2.removeEventListener('click', handleClick);
+    a3.removeEventListener('click', handleClick);
+    a4.removeEventListener('click', handleClick);
+    next.addEventListener('click', nextButton);
+  }
+
+  function nextButton(event){
+    next.removeEventListener('click', nextButton);
+    theUX.askQuestions(cardStack);
+  }
+};
+
+UserInterface.prototype.ask = function(stackSize){
+  let cardStack = this.deck.getMultipleRandomCards(stackSize);
+  this.askQuestions(cardStack);
+};
+
+ux.ask(8);

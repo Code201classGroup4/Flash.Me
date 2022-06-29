@@ -15,6 +15,7 @@ UserInterface(user, deck)
 */
 let cUser = JSON.parse(localStorage.getItem('cUser'));
 
+
 let datalist = document.getElementById('user-name-list');
 let users = User.loadAllUsers();
 for (let u of users){
@@ -48,52 +49,13 @@ function handleSubmit(event){
 }
 
 function logIn(user, isNew){
+  let ux = new UserInterface(user, null);
   let h1 = document.querySelector('div > h1');
   if (isNew){
-    h1.textContent = `User ${user.name} created and Logged In`;
+    h1.textContent = `User ${user.name} Created and Logged In`;
   }
   else {
     h1.textContent = `Previous User ${user.name} is Logged In.`;
   }
-  chooseDeck(user);
+  ux.chooseDeck(document.getElementById('chooseDeck'));
 }
-
-function chooseDeck(user){
-  let section = document.getElementById('chooseDeck');
-  section.innerHTML = '';
-  let label = document.createElement('label');
-  label.textContent = 'Choose a Deck:';
-  section.appendChild(label);
-  for (let d of user.decks){
-    let button = document.createElement('button');
-    button.textContent = d.name;
-    button.addEventListener('click', handleDeckSelect);
-    section.appendChild(button);
-  }
-}
-
-function handleDeckSelect(event){
-  let section = document.getElementById('chooseDeck');
-  section.innerHTML = '';
-  let deckName = event.target.textContent;
-  let user = User.load(JSON.parse(localStorage.getItem('cUser')));
-  for (let d of user.decks){
-    if (d.name === deckName){
-      d.save();
-      section.innerHTML = '';
-      let h1 = document.createElement('h1');
-      h1.textContent = `Current Deck is: ${d.name}`;
-      section.appendChild(h1);
-    }
-  }
-}
-
-//TO DO: check allUsers to allow selection of an already existing user
-//TO DO: Create a new User, and add them to the allUsers list
-//TO DO: select current User by saving them to cUser
-//TO DO: display current user's name
-
-//TO DO: check allDecks to allow selection of an already existing deck
-//TO DO: if no decks, create a new one (with one of 3 categories)
-//TO DO: select a current Deck by saving it to cDeck
-//TO DO: display current deck by showing its category

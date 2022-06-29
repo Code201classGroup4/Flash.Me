@@ -13,8 +13,24 @@ CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
+let user = User.load(JSON.parse(localStorage.getItem('cUser')));
+let deck = CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck')));
+let ux = new UserInterface(user, deck);
 
-//TO DO: get info from form
-//TO DO: create Card Object with it
-//TO DO: use the Card.addCardToAllCards() function to add it to list of all cards;
-//TO DO: optionally load an already existing deck from allDecks, add the card to it, and save it back to allDecks with new card in it
+ux.chooseDeck(document.getElementById('chooseForm'));
+
+let form = document.getElementById('addCard');
+form.addEventListener('submit', handleAddCard);
+
+function handleAddCard(event){
+  event.preventDefault();
+  let d = CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck')));
+  let q = event.target.elements['question'].value;
+  let a = event.target.elements['answer'].value;
+  let c = event.target.elements['category'].value;
+  let newCard = new Card(q, a, c);
+  d.addCard(newCard);
+  d.save();
+  alert(`${newCard.question} added to ${d.name}.`);
+  location.reload();
+}

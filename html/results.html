@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
-  <title>Card page</title>
+  <title>flash.me</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
     integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -19,19 +19,20 @@
 <body>
   <header>
     <nav>
-      <a href="/html/card.html">Get flashed</a>
-      <a href="/html/addcard.html">Create New Deck</a>
+      <a href="/html/index.html">Select User </a>
+      <a href="/html/card.html">Flash Yourself</a>
+      <a href="/html/addcard.html">Create New Cards</a>
       <a href="/html/results.html">See Results</a>
-      <a href="/html/index.html">Add/Change user</a>
     </nav>
 </header>
-  <H1>Card page for the form</H1>
-  <p></p>
-  <H2></H2>
-  <section>
-    <canvas id="myChart"></canvas>
-  </section>
-  
-  <script src="app.js"></script>
+<body>  
+  <H1>Your Results</H1>
+  <canvas id="myChart"></canvas>
+
+  <footer>
+    <p>&copy; 2022 "Team Lightning" - Josh Frazer, Trevor Stephens, Matthew Gebhart, Ari Palmer</p>
+  </footer>
+  <script src="../js/app.js"></script>
+  <script src="../js/results.js"></script>
 </body>
 </html>

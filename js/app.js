@@ -223,7 +223,7 @@ Description: Represents a User
 function User(name){
   this.name = name;
   this.history = {};
-  this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'css')];
+  this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'js')];
 }
 
 User.prototype.record = function(card, correctOrNot){
@@ -281,12 +281,31 @@ function UserInterface(user, deck){
   this.deck = deck;
 }
 
-UserInterface.prototype.displayCard = function(){
-  //TO DO
-};
-
-UserInterface.prototype.handleClick = function(event){
-  //TO DO
+UserInterface.prototype.chooseDeck = function(section){
+  section.innerHTML = '';
+  let label = document.createElement('label');
+  label.textContent = 'Choose a Deck:';
+  section.appendChild(label);
+  for (let d of this.user.decks){
+    let button = document.createElement('button');
+    button.textContent = d.name;
+    button.addEventListener('click', handleDeckSelect);
+    section.appendChild(button);
+  }
+  let user = this.user;
+  function handleDeckSelect(event){
+    section.innerHTML = '';
+    let deckName = event.target.textContent;
+    for (let d of user.decks){
+      if (d.name === deckName){
+        d.save();
+        section.innerHTML = '';
+        let h1 = document.createElement('h1');
+        h1.textContent = `Current Deck is: ${d.name}`;
+        section.appendChild(h1);
+      }
+    }
+  }
 };
 
 ////////////////////////////////////////////////////////////////

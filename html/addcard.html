@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Front Page</title>
+  <title>flash.me</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 
@@ -13,47 +13,39 @@
 <body>
   <header>
     <nav>
-      <a href="/html/card.html">Get flashed</a>
-      <a href="/html/addcard.html">Create New Deck</a>
+      <a href="/html/index.html">Select User </a>
+      <a href="/html/card.html">Flash Yourself</a>
+      <a href="/html/addcard.html">Create New Cards</a>
       <a href="/html/results.html">See Results</a>
-      <a href="/html/index.html">Add/Change user</a>
     </nav>
 </header>
   <h1>Add Card page</h1>
   
-  
   <form id='addCard'>
     <fieldset>
-      <legend></legend>
+      <legend>Add New Card</legend>
       
+      <section id="chooseForm"></section>
       <div class='formDiv'>
-        <label for='QuestionField'> </label>
-        <input type='text' name='cityName' required>
+        <label for='question'>Question: </label>
+        <input type='text' id='question' name='question' required>
         
-        <label for=''></label>
-        <input type="text" name='' required>
+        <label for='answer'>Answer: </label>
+        <input type="text" id='answer' name='answer' required>
+
+        <label for="category">Category: </label>
+        <input type="text" id="category" name="category" required>
       </div>
       
-      
-      
-      <input id='button' type="submit" value="Click here to add Flash">
+      <button type="submit">Add A Card to the Current Deck</button>
     </fieldset>
-    <div class='about'>
-      <p></p>
-    </div>
   
-    
-    
-  
-    
-    
+
     <footer>
-      <div id='info'>
-        <p><strong class='strong'>HQ Location:</strong> 555 DoNotCallUs Ave., Anywhere, USA 00000  </p>
-        <p><strong class='strong'>Hours of Operation: </strong> 9:00 AM to 6:00 PM</p>
-      </div>
+      <p>&copy; 2022 "Team Lightning" - Josh Frazer, Trevor Stephens, Matthew Gebhart, Ari Palmer</p>
     </footer>
-  <script src="./app.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/addcard.js"></script>
 </body>
 
 </html> 
