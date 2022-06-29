@@ -1,0 +1,29 @@
+/* this stylesheet is to be used to style forms used within addcard and index */
+/* font-family: 'Roboto', sans-serif; id like to add this as the main font*/
+body {
+    background-image: url(css/img/wood1.jpg);
+    
+}
+.formDiv {
+    display: flex;
+    flex-direction:column;
+    width: 200px;
+    height: 200px;
+
+}
+input {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px, 10px;
+    box-shadow:15px 4px rgba(0,0,0,0.06);
+}
+#submit {
+    
+}
+nav {
+    text-decoration: none;
+}
+nav a:hover {
+    background-color: rgba(240, 240, 240, .3);
+}
