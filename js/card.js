@@ -27,12 +27,12 @@ UserInterface(user, deck)
 //TO DO: user the cUser's record() function to record the results for that card
 //TO DO: remove the card from the randomly generated list, repeat for next one
 
-
-
 let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))), CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck'))));
 
 UserInterface.prototype.askQuestions = function(cardStack){
   let cardFront = document.getElementById('card-front');
+  let cardcount = document.getElementById('card-counter');
+  cardcount.textContent = cardStack.length + ' Cards Left.';
 
   if (cardStack.length === 0){
     this.user.save();
@@ -42,6 +42,18 @@ UserInterface.prototype.askQuestions = function(cardStack){
 
   let card = cardStack.pop();
   let answerStack = this.deck.getMultipleRandomCards(3);
+  //prevent same answer appearing twice
+  while(CardDeck.isInDeck(card, answerStack)){
+    for (let i = 0; i < answerStack.length; i++){
+      if(answerStack[i].question === card.question){
+        answerStack[i] = this.deck.getRandomCard();
+      }
+    }
+  }
+  let index = Math.floor(Math.random() * answerStack.length);
+  answerStack.splice(index, 0, card);
+
+
   let aUser = this.user;
   let theUX = this;
 
@@ -51,10 +63,10 @@ UserInterface.prototype.askQuestions = function(cardStack){
   let a4 = document.getElementById('answer4');
   let next = document.getElementById('next-button');
   cardFront.textContent = card.question;
-  a1.textContent = card.answer;
-  a2.textContent = answerStack[0].answer;
-  a3.textContent = answerStack[1].answer;
-  a4.textContent = answerStack[2].answer;
+  a1.textContent = answerStack[0].answer;
+  a2.textContent = answerStack[1].answer;
+  a3.textContent = answerStack[2].answer;
+  a4.textContent = answerStack[3].answer;
   a1.addEventListener('click', handleClick);
   a2.addEventListener('click', handleClick);
   a3.addEventListener('click', handleClick);
