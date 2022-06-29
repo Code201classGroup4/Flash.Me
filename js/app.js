@@ -1,17 +1,16 @@
 'use strict';
+
 /*
 app.js will be included first on every page
 
 localStorage key: allCards - an array of Card objects representing all cards added so far
-localStorage key: allDecks - an array of CardDeck objects representing all decks saved so far
 localStorage key: allUsers - an arra of User objects representing all users created so far
 localStorage key: cUser - the current loaded user
-localStorage key: cDeck - the current loaded deck
 
 Card(question, answer, categories)
 CardDeck(category)
 User(name)
-UserInterface(user, deck)
+UserInterface(user)
 */
 
 /*
@@ -146,7 +145,6 @@ CardDeck.isInDeck = function(card, deck){
 };
 
 CardDeck.prototype.getMultipleRandomCards = function(howMany){
-// TO DO: choose 'howMany' random cards from this.deck and return them as an array / list
   let cards = [];
   while (cards.length < howMany && cards.length < this.deck.length){
     let card = this.getRandomCard();
@@ -173,12 +171,12 @@ CardDeck.prototype.addCategory = function(category){
   this.categories.push(category);
 };
 
-CardDeck.prototype.save = function(){
+/* CardDeck.prototype.save = function(){
   localStorage.setItem('cDeck', JSON.stringify(this));
-};
+}; */
 
 //turn JSON.parsed deck back into a CardDeck object
-CardDeck.loadDeck = function(parsedDeck){
+CardDeck.load = function(parsedDeck){
   let newDeck = new CardDeck();
   newDeck.name = parsedDeck.name;
   newDeck.categories = parsedDeck.categories;
@@ -189,33 +187,6 @@ CardDeck.loadDeck = function(parsedDeck){
   return newDeck;
 };
 
-CardDeck.loadAllDecks = function() {
-  let allDecks = JSON.parse(localStorage.getItem('allDecks'));
-  if (allDecks){
-    let output = [];
-    for (let d of allDecks){
-      let deck = CardDeck.loadDeck(d);
-      output.push(deck);
-    }
-    return output;
-  }
-  else {
-    localStorage.setItem('allDecks',JSON.stringify([]));
-    return [];
-  }
-};
-
-CardDeck.addDeckToAllDecks = function(deck){
-  let allDecks = CardDeck.loadAllDecks();
-  for (let d of allDecks){
-    if (deck.name === d.name){
-      return;
-    }
-  }
-  allDecks.push(deck);
-  localStorage.setItem('allDecks', JSON.stringify(allDecks));
-};
-
 /*
 User Object
 Description: Represents a User
@@ -224,6 +195,7 @@ function User(name){
   this.name = name;
   this.history = {};
   this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'js')];
+  this.currentDeck = this.decks[0];
 }
 
 User.prototype.record = function(card, correctOrNot){
@@ -236,18 +208,25 @@ User.prototype.record = function(card, correctOrNot){
   }
 };
 
-User.prototype.save = function(){
-  localStorage.setItem('cUser', JSON.stringify(this));
-};
-
 User.load = function(parsedUser){
   let user = new User(parsedUser.name);
   user.history = parsedUser.history;
+  user.decks = [];
+  for (let d of parsedUser.decks){
+    user.decks.push(CardDeck.load(d));
+  }
+  for (let d of user.decks){
+    if (d.name === parsedUser.currentDeck.name){
+      user.currentDeck = d;
+    }
+  }
   return user;
 };
 
 User.loadAllUsers = function(){
   let allUsers = JSON.parse(localStorage.getItem('allUsers'));
+  console.log('loading allUsers');
+  console.log(allUsers);
   if (allUsers){
     let output = [];
     for (let u of allUsers){
@@ -264,8 +243,10 @@ User.loadAllUsers = function(){
 
 User.addUserToAllUsers = function(user){
   let allUsers = User.loadAllUsers();
-  for (let u of allUsers){
-    if (user.name === u.name){
+  for (let i = 0; i < allUsers.length; i++){
+    if(allUsers[i].name.toLowerCase() === user.name.toLowerCase()){
+      allUsers[i] = user;
+      localStorage.setItem('allUsers', JSON.stringify(allUsers));
       return;
     }
   }
@@ -273,12 +254,15 @@ User.addUserToAllUsers = function(user){
   localStorage.setItem('allUsers', JSON.stringify(allUsers));
 };
 
+User.prototype.save = function(){
+  localStorage.setItem('cUser', JSON.stringify(this));
+  User.addUserToAllUsers(this);
+};
 /*
  UserInterfaceObject
 */
-function UserInterface(user, deck){
+function UserInterface(user){
   this.user = user;
-  this.deck = deck;
 }
 
 UserInterface.prototype.chooseDeck = function(section){
@@ -298,11 +282,15 @@ UserInterface.prototype.chooseDeck = function(section){
     let deckName = event.target.textContent;
     for (let d of user.decks){
       if (d.name === deckName){
-        d.save();
+        user.currentDeck = d;
+        user.save();
         section.innerHTML = '';
         let h1 = document.createElement('h1');
-        h1.textContent = `Current Deck is: ${d.name}`;
+        h1.textContent = `Current Deck is: ${user.currentDeck.name}`;
         section.appendChild(h1);
+
+        let p = document.getElementById('login-info');
+        p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
       }
     }
   }

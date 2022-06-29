@@ -3,7 +3,6 @@
 app.js will be included first on every page
 
 localStorage key: allCards - an array of Card objects representing all cards added so far
-localStorage key: allDecks - an array of CardDeck objects representing all decks saved so far
 localStorage key: allUsers - an arra of User objects representing all users created so far
 localStorage key: cUser - the current loaded user
 localStorage key: cDeck - the current loaded deck
@@ -13,9 +12,10 @@ CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
-let user = User.load(JSON.parse(localStorage.getItem('cUser')));
-let deck = CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck')));
-let ux = new UserInterface(user, deck);
+
+let ux = new UserInterface(User.load(JSON.parse(localStorage.getItem('cUser'))));
+let p = document.getElementById('login-info');
+p.textContent = `User: ${ux.user.name}. Current Deck: ${ux.user.currentDeck.name}.`;
 
 ux.chooseDeck(document.getElementById('chooseForm'));
 
@@ -24,13 +24,12 @@ form.addEventListener('submit', handleAddCard);
 
 function handleAddCard(event){
   event.preventDefault();
-  let d = CardDeck.loadDeck(JSON.parse(localStorage.getItem('cDeck')));
   let q = event.target.elements['question'].value;
   let a = event.target.elements['answer'].value;
   let c = event.target.elements['category'].value;
   let newCard = new Card(q, a, c);
-  d.addCard(newCard);
-  d.save();
-  alert(`${newCard.question} added to ${d.name}.`);
+  ux.user.currentDeck.addCard(newCard);
+  ux.user.save();
+  alert(`${newCard.question} added to ${ux.user.currentDeck.name}.`);
   location.reload();
 }
