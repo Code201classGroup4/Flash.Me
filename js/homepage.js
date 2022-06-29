@@ -50,7 +50,7 @@ function handleSubmit(event){
 function logIn(user, isNew){
   let h1 = document.querySelector('div > h1');
   if (isNew){
-    h1.textContent = `User ${user.name} created and Logged In`;
+    h1.textContent = `User ${user.name} Created and Logged In`;
   }
   else {
     h1.textContent = `Previous User ${user.name} is Logged In.`;

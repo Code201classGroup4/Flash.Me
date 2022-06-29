@@ -223,7 +223,7 @@ Description: Represents a User
 function User(name){
   this.name = name;
   this.history = {};
-  this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'css')];
+  this.decks = [new CardDeck(`${name}'s HTML Deck`, 'html'), new CardDeck(`${name}'s CSS Deck`, 'css'), new CardDeck(`${name}'s JavaScript Deck`, 'js')];
 }
 
 User.prototype.record = function(card, correctOrNot){

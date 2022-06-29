@@ -15,29 +15,33 @@ CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
-let questionsArray =[]
-let correctArray = []
-let incorrectArray = []
+let questionsArray =[];
+let correctArray = [];
+let incorrectArray = [];
 
-let aUser = user.load(JSON.parse(localStorage.getItem('cUser')));
+let aUser = User.load(JSON.parse(localStorage.getItem('cUser')));
 
 function renderChart(){
-for(question in aUser.history){
-let answers = aUser.history[question]
-let wrongAnswers = 0
-let rightAnswers = 0
-for(let i =0; i < answers.length; i++){
-if (answers[i]==true){
-  rightAnswers++;
-}
-else{wrongAnswers++}
-}
-questionsArray.push(question);
-correctArray.push(rightAnswers);
-incorrectArray.push(wrongAnswers);
+  for(let question in aUser.history){
+    let answers = aUser.history[question];
+    let wrongAnswers = 0;
+    let rightAnswers = 0;
+    for(let i =0; i < answers.length; i++){
+      if (answers[i] === true){
+        rightAnswers++;
+      }
+      else{
+        wrongAnswers++;
+      }
+    }
+    questionsArray.push(question);
+    correctArray.push(rightAnswers);
+    incorrectArray.push(wrongAnswers);
+  }
 }
 
-};
+renderChart();
+let ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
   type: 'bar',
