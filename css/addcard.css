@@ -1,25 +1,42 @@
 /* this stylesheet is to be used to style forms used within addcard and index */
 /* font-family: 'Roboto', sans-serif; id like to add this as the main font*/
-body {
-    background-image: url(css/img/wood1.jpg);
+
+/* .formDiv {
+    display: flex;
+    flex-direction: column;
+  
+
+}
+.btn {
     
+} */
+.grid-container {
+    height: 300px;
+    max-width: 900px;
+    display: grid;
 }
 .formDiv {
+    display: grid;
+    grid-area: calc(100vw / 3);
+    margin: 10px;
+}
+.btn {
     display: flex;
-    flex-direction:column;
+    flex-direction: ;
+    height: 25px;
     width: 200px;
-    height: 200px;
+    margin: 10px;
 
+    
 }
 input {
     display: flex;
     flex-direction: column;
     padding: 10px;
     margin: 10px, 10px;
-    box-shadow:15px 4px rgba(0,0,0,0.06);
 }
-#submit {
-    
+#category {
+    width: 200px;
 }
 nav {
     text-decoration: none;

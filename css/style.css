@@ -1,6 +1,11 @@
 body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: rgba(240, 240, 240, 1);
+    background-image:
+        linear-gradient(rgba(2, 1, 1, 0.346),
+            rgba(0, 0, 0, 0.401)),
+        url(/css/img/wood1.jpg);
+
 }
 
 nav {
@@ -14,6 +19,7 @@ nav a {
     padding: 20px;
     font-size: 25px;
     color: white;
+    text-decoration: none;
 }
 
 h1 {
@@ -28,6 +34,7 @@ footer {
     width: 100%;
     padding: 1px;
     border-radius: 4px;
-    background-color: rgba(200, 200, 200, 1);
+    background-color: rgb(19, 17, 17);
     text-align: center;
+    color:aliceblue;
 }
