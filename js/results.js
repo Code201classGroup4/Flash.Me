@@ -46,29 +46,37 @@ function renderChart(){
 renderChart();
 let ctx = document.getElementById('myChart');
 
+Chart.defaults.font.size = 18;
+Chart.defaults.color = "white"
+
+
 new Chart(ctx, {
   type: 'bar',
   backgroundColor:'red',
   data: {
     labels: questionsArray,
+    font: {
+      color: 'white',
+      size: 20,
+    },
     
     datasets: [{
       label: '# of correct answers',
       
       data: correctArray,
-      backgroundColor: '#966F33',
+      backgroundColor: '#FCD023',
       
     }, {
       label: '# of incorrect answers',
       data: incorrectArray,
-      backgroundColor: '#335B96',
+      backgroundColor: '#2531DB',
     }],
   },
   options: {
     responsive: true,
     scales: {
       yAxes: {
-        ticks: { color: 'black', beginAtZero: true, fontSize: 100, },
+        ticks: { color: 'white', beginAtZero: true, },
         yAxes: [{
           ticks: {
             fontSize: 50,
@@ -76,7 +84,7 @@ new Chart(ctx, {
         }]
       },
       x: {
-        ticks: { color: 'black', beginAtZero: true }
+        ticks: { color: 'white', beginAtZero: true }
       }
     }
   }
