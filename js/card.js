@@ -24,7 +24,6 @@ UserInterface.prototype.askQuestions = function(cardStack){
   let cardFront = document.getElementById('card-front');
   let cardcount = document.getElementById('card-counter');
   cardcount.textContent = cardStack.length + ' Cards Left.';
-
   if (cardStack.length === 0){
     this.user.save();
     let a = document.createElement('a');
@@ -34,7 +33,6 @@ UserInterface.prototype.askQuestions = function(cardStack){
     cardFront.appendChild(a);
     return;
   }
-
   let card = cardStack.pop();
   let answerStack = this.user.currentDeck.getMultipleRandomCards(3);
   //prevent same answer appearing twice
@@ -92,7 +90,7 @@ UserInterface.prototype.askQuestions = function(cardStack){
 };
 
 UserInterface.prototype.ask = function(stackSize){
-  let cardStack = this.user.currentDeck.getMultipleRandomCards(stackSize);  //TO DO: rewrite so uses this this.user.currentDeck
+  let cardStack = this.user.currentDeck.getMultipleRandomCards(stackSize);
   this.askQuestions(cardStack);
 };
 

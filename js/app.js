@@ -129,6 +129,7 @@ function CardDeck(name, category){
 }
 
 CardDeck.prototype.getRandomCard = function(){
+  console.log('GETTING RANDOM CARD');
   let length = this.deck.length;
   let randomIndex = Math.floor(Math.random() * length);
   let randomCard = this.deck[randomIndex];
@@ -146,8 +147,10 @@ CardDeck.isInDeck = function(card, deck){
 
 CardDeck.prototype.getMultipleRandomCards = function(howMany){
   let cards = [];
-  while (cards.length < howMany && cards.length < this.deck.length){
+  while (cards.length < howMany && cards.length < this.deck.length && cards.length < Card.loadAllCards().length){
+    
     let card = this.getRandomCard();
+
     if (CardDeck.isInDeck(card, cards)){
       continue;
     }
@@ -237,6 +240,24 @@ User.load = function(parsedUser){
   }
   return user;
 };
+
+User.prototype.hasDeck = function(deckName){
+  for (let d of this.decks){
+    if (d.name === deckName){
+      return true;
+    }
+  }
+  return false;
+}
+
+User.prototype.getDeck = function(deckName){
+  for (let d of this.decks){
+    if(d.name === deckName){
+      return d;
+    }
+  }
+  return null;
+}
 
 User.loadAllUsers = function(){
   let allUsers = JSON.parse(localStorage.getItem('allUsers'));
@@ -366,10 +387,21 @@ UserInterface.prototype.chooseDeckBoxes = function(section){
       }
     }
     //4.F. after all chosen decks are added to the list, pass the list to the CardDeck.combineDecks(AnArrayOfDecks) method
-    let newDeck = CardDeck.combineDecks(chosenDecks);
+    let newName = chosenDecks[0].name;
+    for(let i = 1; i < chosenDecks.length; i++){
+      newName = newName + ' + ' + chosenDecks[i].name;
+    }
+
     //4.G assign the new deck to user current deck and add it to user decks
-    theUser.currentDeck = newDeck;
-    theUser.decks.push(newDeck);
+    if (theUser.hasDeck(newName)){
+      theUser.currentDeck = theUser.getDeck(newName);
+    }
+    else {
+      let newDeck = CardDeck.combineDecks(chosenDecks);
+      newDeck.name = newName;
+      theUser.currentDeck = newDeck;
+      theUser.decks.push(newDeck);
+    }
     //4.H save the user
     theUser.save();
 
