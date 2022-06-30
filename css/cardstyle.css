@@ -9,13 +9,10 @@
   margin: auto;
   width: 600px;
   height: 400px;
-  border: 3px solid #ABB7B7;
+  border:3px solid #ABB7B7;
   border-radius: 4px;
   background-color: #FCFCFD;
   z-index: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 #answers-area {
