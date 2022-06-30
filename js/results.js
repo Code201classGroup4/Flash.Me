@@ -3,9 +3,9 @@
 app.js will be included first on every page
 
 localStorage key: allCards - an array of Card objects representing all cards added so far
-localStorage key: allUsers - an arra of User objects representing all users created so far
+localStorage key: allUsers - an array of User objects representing all users created so far
 localStorage key: cUser - the current loaded user
-localStorage key: cDeck - the current loaded deck
+
 
 for question of user.history
 
@@ -14,6 +14,9 @@ CardDeck(category)
 User(name)
 UserInterface(user, deck)
 */
+
+// creating and rendering results chart //
+
 let questionsArray =[];
 let correctArray = [];
 let incorrectArray = [];
