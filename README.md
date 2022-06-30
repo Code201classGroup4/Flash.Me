@@ -18,8 +18,8 @@ A customizable Flash Card App.
 
 ## Domain Modeling
 - link to domain model - https://matthew415211.invisionapp.com/freehand/flash-me-fOXY6hsBB?dsid_h=04ec2192718562f1f573d72abbb9bacf6be4cf3f0e13e06201ba12e328bb6582&uid_h=613014f735b140ee817cefc672bbef19b061a56e93c56d664ba3bbffff682a6e
-- ![Domian Model](https://user-images.githubusercontent.com/106119331/176010243-fc9a6c35-9d28-4b07-9041-596e80e61275.png)
-
+- ![Domain Model](https://user-images.githubusercontent.com/106119331/176010243-fc9a6c35-9d28-4b07-9041-596e80e61275.png)
+![Flash Card Objects](https://user-images.githubusercontent.com/6252799/176752233-3ea9036e-ba7c-4f45-ba75-8781415fc273.png)
 
 ## Software Requirements
 
