@@ -44,3 +44,17 @@ footer {
     font-size: 16px;
     text-emphasis: bold;
 }
+
+#chooseDeck {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+}
+
+input[type=checkbox] {
+   height: 25px;
+   width: 25px;
+}

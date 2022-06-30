@@ -52,7 +52,7 @@ function logIn(u, isNew){
     h1.textContent = `User ${u.name} Created and Logged In`;
   }
   else {
-    h1.textContent = `Previous User ${u.name} is Logged In.`;
+    h1.textContent = `Previous User ${u.name} is Logged In`;
   }
   ux.chooseDeckBoxes(document.getElementById('chooseDeck'));
 
