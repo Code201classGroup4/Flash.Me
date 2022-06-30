@@ -129,7 +129,6 @@ function CardDeck(name, category){
 }
 
 CardDeck.prototype.getRandomCard = function(){
-  console.log('GETTING RANDOM CARD');
   let length = this.deck.length;
   let randomIndex = Math.floor(Math.random() * length);
   let randomCard = this.deck[randomIndex];
@@ -335,7 +334,6 @@ UserInterface.prototype.chooseDeck = function(section){
 };
 
 UserInterface.prototype.chooseDeckBoxes = function(section){
-  //TO DO: make a new choose deck function that creates checkboxes based off of this.user.decks
   // 1. Generate checkboxes from this.user.decks
   section.innerHTML = '';
   let decks = this.user.decks;
