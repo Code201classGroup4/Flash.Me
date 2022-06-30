@@ -1,5 +1,5 @@
 body {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: rgba(240, 240, 240, 1);
     background-image:
         linear-gradient(rgba(2, 1, 1, 0.346),
@@ -57,4 +57,9 @@ footer {
 input[type=checkbox] {
    height: 25px;
    width: 25px;
+}
+
+#results-header {
+    color: white;
+    font-size: 50px;
 }
