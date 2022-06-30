@@ -19,18 +19,6 @@
     z-index: 0;
 }
 
-/* #card-stack1 {
-    position: absolute;
-    top: 112px;
-    left: 220px;
-    width: 600px;
-    height: 400px;
-    border:3px solid #ABB7B7;
-    border-radius: 4px;
-    background-color: #FCFCFD;
-    z-index: -1;
-} */
-
 #answers-area {
     display: flex;
     width: auto;
@@ -104,9 +92,90 @@ button:active {
     bottom: 60px;
     right: 10px;
     width: 300px;
-    height: 20px;
+    height: 24px;
     background-color: #FCFCFD;
     border:3px solid #ABB7B7;
     border-radius: 5px;
     text-align: center;
+}
+
+
+/* /// testing card stacking effect /// */
+
+html {
+  --offset-before: 16px;
+  --offset-after: 32px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.card {
+  position: relative;
+  cursor: pointer;
+  width: 600px;
+  height: 400px;
+  background-color: #FCFCFD;
+  border:3px solid #ABB7B7;
+  border-radius: 4px;
+  margin: 60px auto;
+}
+ 
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+ 
+.card::before,
+.card::after,
+.card .card-inner {
+  background-color: #FCFCFD;
+  width: 600px;
+  height: 400px;
+  border:3px solid #ABB7B7;
+  border-radius: 4px;
+  transition: transform 0.3s;
+}
+ 
+.card::before,
+.card-inner {
+  z-index: 1;
+}
+ 
+.card-inner {
+  position: relative;
+  padding: 3rem;
+}
+
+.card-top-right::before {
+  transform: translate(var(--offset-before), calc(-1 * var(--offset-before)));
+}
+
+.card-top-right::after {
+  transform: translate(var(--offset-after), calc(-1 * var(--offset-after)));
+}
+
+.card-top-right:hover::before,
+.card-top-right:hover::after,
+.card-top-right:hover .card-inner {
+  transform: translate(var(--offset-before), 2);
+}
+
+#card-write {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  font-size: 24px;
 }
