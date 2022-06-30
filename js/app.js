@@ -4,7 +4,7 @@
 app.js will be included first on every page
 
 localStorage key: allCards - an array of Card objects representing all cards added so far
-localStorage key: allUsers - an arra of User objects representing all users created so far
+localStorage key: allUsers - an array of User objects representing all users created so far
 localStorage key: cUser - the current loaded user
 
 Card(question, answer, categories)

@@ -1,3 +1,5 @@
+/* This sheet contains styling for our Card page and animates styles our buttons */
+
 #card-space {
     width: auto;
     height:400px;
@@ -28,6 +30,8 @@
     align-items: center;
    
 }
+
+/* button styling and animation */
 
 button {
   align-items: center;
@@ -100,7 +104,7 @@ button:active {
 }
 
 
-/* /// testing card stacking effect /// */
+/* /// animation for stacking effect /// */
 
 html {
   --offset-before: 16px;
