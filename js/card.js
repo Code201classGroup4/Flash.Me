@@ -21,7 +21,7 @@ if (p){
 
 
 UserInterface.prototype.askQuestions = function(cardStack){
-  let cardFront = document.getElementById('card-front');
+  let cardFront = document.getElementById('card-write');
   let cardcount = document.getElementById('card-counter');
   cardcount.textContent = cardStack.length + ' Cards Left.';
 
